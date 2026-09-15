@@ -2,6 +2,7 @@ import Link from "next/link";
 import Categories from "./Categories";
 import ProductCard from "./ProductCard";
 import { ProductsType } from "./types";
+import Filter from "./Filter";
 // Fak data here 
 export const products: ProductsType = [
   {
@@ -115,10 +116,13 @@ export const products: ProductsType = [
 ];
 
 
-const ProductList = ({category}: {category:String}) => {
+const ProductList = ({category, params}: {category:String, params: 'homepage' | 'products'}) => {
+  console.log("params:", params);
+console.log("type:", typeof params);
   return (
     <div className="w-full">
       <Categories />
+      {params === 'products' && <Filter />}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-12">
         {
           products.map((product) => (

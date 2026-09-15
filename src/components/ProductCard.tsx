@@ -56,7 +56,7 @@ const ProductCard = ({product} : {product:ProductType}) => {
             </span>
             <select name="size" id='size' className="ring ring-gray-300 rounded-md px-2 py-1">
               {product.sizes.map(size=> (
-                <option value={size}>
+                <option key={size} value={size}>
                   {size.toUpperCase()}
                 </option>
               ))}
