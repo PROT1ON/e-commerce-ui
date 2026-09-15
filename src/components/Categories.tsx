@@ -1,7 +1,7 @@
 'use client'
 
 import { Briefcase, Footprints, Glasses, Hand, Shirt, ShoppingBasket, Venus } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
     const categories = [
   {
     name: "All",
@@ -49,12 +49,15 @@ const Categories = () => {
     //Serarch params
     const searchParams = useSearchParams()
     const router = useRouter()
+    const pathname = usePathname()
     const selectedCategory = searchParams.get('category')
 
     console.log(selectedCategory)
     //creatig a button for routes 
     const handleChange = (value: null | string) => {
-        router.push(`/?category = ${value}`)
+      const params = new URLSearchParams(searchParams)
+      params.set('category', value || 'all')
+        router.push(`${pathname}?${params.toString()}`, {scroll: false})
     }
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2 bg-gray-100 p-2 rounded-lg mb-4 text-sm">
@@ -62,9 +65,9 @@ const Categories = () => {
                 <div className={ ` flex items-center justify-center gap-2 cursor-pointer px-2 py-1 rounded-md
                  ${cat.slug === selectedCategory ?
                   'bg-white' : 
-                  'bg-gray-400'} 
+                  'bg-gray-200'} 
                   `} key={cat.name}
-                  onClick={}
+                  onClick={()=> handleChange(cat.slug)}
                   >
                     {cat.icon}
                     {cat.name}

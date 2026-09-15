@@ -1,3 +1,6 @@
+import Link from "next/link";
+import Categories from "./Categories";
+import ProductCard from "./ProductCard";
 import { ProductsType } from "./types";
 // Fak data here 
 export const products: ProductsType = [
@@ -112,9 +115,22 @@ export const products: ProductsType = [
 ];
 
 
-const ProductList = () => {
+const ProductList = ({category}: {category:String}) => {
   return (
-    <div className="w-full">ProductList</div>
+    <div className="w-full">
+      <Categories />
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-12">
+        {
+          products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))
+        }
+      </div>
+      <Link href={category ? `/products/?category=${category}` : '/prodcuts'}
+      className="flex justify-end mt-4 underline text-sm text-gray-500">
+        View All products
+      </Link>
+    </div>
   )
 }
 
