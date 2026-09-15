@@ -176,20 +176,23 @@ const CartPage = () => {
                                     </div>
                                     Item details 
                                     <div className='flex flex-col justify-between'>
-                                        <div className=''>
-                                            <p>
+                                        <div className='flex flex-col gap-1'>
+                                            <p className='text-sm font-medium'>
                                                 {item.name}
                                             </p>
-                                            <p>
+                                            <p className='text-gray-500 font-medium'>
                                                 Quantity:{" "}{item.quantity}
                                             </p>
-                                            <p>
+                                            <p className='text-gray-500 font-medium'>
                                                 Size:{" "}{item.selectedSize}
                                             </p>
-                                            <p>
+                                            <p className='text-gray-500 font-medium'>
                                                 Color:{" "}{item.selectedColor}
                                             </p>
                                         </div>
+                                        <p className='font-medium'>
+                                            {item.price.toFixed(2)}
+                                        </p>
                                     </div>
                                     {/* Delet button */}
                                     <button className='w-8 transition-all h-8 rounded-full bg-red-100 text-red-400 flex items-center justify-center cursor-pointer'>
@@ -199,7 +202,7 @@ const CartPage = () => {
                             </div>
                         ))
                     ) : activeStep === 2 ? (
-                        <ShippingForm />
+                        <ShippingForm setShippingForm={setShippingForm}/>
                     ) : activeStep == 3 && shippingForm ? 
                     <PaymentForm /> 
                     :
@@ -207,7 +210,7 @@ const CartPage = () => {
                 }
                 </div>
             {/* Details  */}
-            <div className='w-full lg:w-7/12 shadow-lg border border-gray-100 p-8 rounded-lg flex flex-col gap-8'>
+            <div className='w-full lg:w-7/12 shadow-lg border border-gray-100 p-8 rounded-lg flex flex-col gap-8 h-max'>
                 <h2 className='font-semibold'> 
                     Cart Details
                     </h2>
