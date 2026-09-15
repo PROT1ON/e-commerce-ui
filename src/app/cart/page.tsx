@@ -1,7 +1,8 @@
 'use client'
 import PaymentForm from '@/components/PaymentForm'
 import ShippingForm from '@/components/ShippingForm'
-import { CartItemType } from '@/components/types'
+import { CartItemType, shippingFormInputs } from '@/components/types'
+import useCartStore from '@/stores/cartStores'
 import { ArrowRight, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -130,9 +131,11 @@ export const CartItems: CartItemType[] = [
 const CartPage = () => {
     const searchParams = useSearchParams()
     const router = useRouter()
-    const [shippingForm , setShippingForm ] = useState(null)
+    const [shippingForm , setShippingForm ] = useState<shippingFormInputs>()
 
     const activeStep = parseInt(searchParams.get('step') || "1")
+
+    const {cart, addtoCart , removeFromCart} =useCartStore()
   return (
     <div className='flex flex-col gap-8 items-center justify-center mt-12'>
         {/* TITLE */}
@@ -161,9 +164,9 @@ const CartPage = () => {
             {/* Steps */}
                 <div className='w-full lg:w-7/12 shadow-lg border border-gray-100 p-8 rounded-lg flex flex-col gap-8'>
                     {activeStep === 1 ? (
-                        CartItems.map(item => (
+                        cart.map(item => (
                             <div className='flex items-center justify-between'
-                             key={item.id}
+                             key={item.id+ item.selectedColor + item.selectedSize}
                              >
                                 {/* IMages */}
                                 <div className='flex gap-8'>
@@ -195,7 +198,9 @@ const CartPage = () => {
                                         </p>
                                     </div>
                                     {/* Delet button */}
-                                    <button className='w-8 transition-all h-8 rounded-full bg-red-100 text-red-400 flex items-center justify-center cursor-pointer'>
+                                    <button 
+                                    onClick={() => removeFromCart(item)}
+                                    className='w-8 transition-all h-8 rounded-full bg-red-100 text-red-400 flex items-center justify-center cursor-pointer'>
                                         <Trash2 className='w-4 h-4' />
                                     </button>
                                     </div>
@@ -220,7 +225,7 @@ const CartPage = () => {
                                 Subtotal
                             </p>
                             <p className='font-mdeium'>
-                                ${CartItems.reduce
+                                ${cart.reduce
                                 ((acc,item) => acc+item.price * item.quantity,
                                 0).toFixed(2)}
                             </p>

@@ -5,6 +5,8 @@ import { ProductType } from "./types"
 import Image from "next/image"
 import { useState } from "react"
 import Link from "next/link"
+import useCartStore from "@/stores/cartStores"
+import { toast } from "react-toastify"
 
 const ProductCard = ({product} : {product:ProductType}) => {
   const [productTypes , setProductTypes] = useState({
@@ -12,6 +14,7 @@ const ProductCard = ({product} : {product:ProductType}) => {
     color:product.colors[0]
   })
 
+  const {addtoCart} = useCartStore()
   const handleProductType = ({
     type,
     value
@@ -23,6 +26,17 @@ const ProductCard = ({product} : {product:ProductType}) => {
       ...prev,
       [type]: value
     }))
+  }
+
+  const handleAddtoCart = () => {
+    addtoCart({
+      ...product,
+      quantity: 1,
+      selectedSize:productTypes.size,
+      selectedColor:productTypes.color
+    }
+  )
+  toast.success('Product Added to Cart')
   }
   return (
     <div className="shadow-lg rounded-lg overflow-hidden ">
@@ -85,7 +99,9 @@ const ProductCard = ({product} : {product:ProductType}) => {
           <p className="font-medium">
             ${product.price.toFixed(2)}
           </p>
-          <button className="ring-1 ring-gray-200 shadow-lg rounded-md px-2 pyy-1 text-sm cursor-pointer hover:text-white hover:bg-black transition-all flex items-center gap-3">
+          <button 
+          onClick={handleAddtoCart}
+          className="ring-1 ring-gray-200 shadow-lg rounded-md px-2 pyy-1 text-sm cursor-pointer hover:text-white hover:bg-black transition-all flex items-center gap-3">
             <ShoppingCart className="w-4 h-4"/>
             Add to Cart
           </button>

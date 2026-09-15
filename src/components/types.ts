@@ -51,3 +51,14 @@ export const paymentFormSchema = z.object({ cardNumber: z .string() .min(16, "Ca
      expiry: z .string() .regex(/^(0[1-9]|1[0-2])\/\d{2}$/, "Use MM/YY format"), cvv: z .string() .regex(/^\d{3,4}$/, "CVV must be 3 or 4 digits"), })
      
 export type paymentFormInputs = z.infer<typeof paymentFormSchema>
+
+
+export type CartStoreStateType = {
+    cart: CartItemsType
+}
+
+export type CartStoreActionsType = {
+    addtoCart: (product: CartItemType) => void
+    removeFromCart: (product:CartItemType) => void
+    clearCart: () => void
+}
