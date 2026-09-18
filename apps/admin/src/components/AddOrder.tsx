@@ -108,38 +108,7 @@ const AddOrder = () => {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="address"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Address</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      This is the public location.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-                <FormField
-                control={form.control}
-                name="city"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>City</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      This is the public location(city).
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            
               <Button type="submit">Submit</Button>
             </form>
           </Form>

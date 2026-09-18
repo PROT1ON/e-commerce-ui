@@ -84,7 +84,7 @@ const ProductsPage = async ({
       {/* Image */}
       <div className="w-full lg:w-5/12 relative aspect-[2/3]">
         <Image
-          src={currentProduct.images[selectedColor]}
+          src={currentProduct.images?.[selectedColor] || ''}
           alt={currentProduct.name}
           fill
           className="object-contain rounded-md"

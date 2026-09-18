@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
+    "@repo/ui": "^0.0.0",
     "lucide-react": "^1.45.0",
     "next": "15.4.5",
     "react": "19.1.0",
@@ -20,13 +21,14 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
+    
     "@tailwindcss/postcss": "^4",
+    "@repo/eslint-config": "0.0.0",
+"@repo/typescript-config": "0.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.4.5",
+    
     "tailwindcss": "^4",
     "typescript": "^5"
   }
